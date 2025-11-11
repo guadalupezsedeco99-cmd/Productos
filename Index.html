@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiMarket – Productos y Servicios Digitales</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body { background-color: #f8f9fa; scroll-behavior: smooth; }
+    .navbar { background-color: rgba(0,0,0,0.85) !important; }
+    nav a.nav-link { color: #fff !important; }
+    .hero {
+      background: url("img/Fondo.jpg") center/cover no-repeat;
+      color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+      padding: 150px 0; text-align: center;
+    }
+    .service-card img { height: 180px; object-fit: cover; border-radius: .5rem .5rem 0 0; }
+    footer { background-color: #000; color: white; padding: 20px 0; text-align: center; }
+
+    #installBtn {
+      position: fixed; bottom: 25px; right: 25px;
+      width: 65px; height: 65px; border-radius: 50%;
+      background: linear-gradient(145deg, #000, #222);
+      color: white; display: none; align-items:center; justify-content:center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      cursor: pointer; z-index: 1000;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    #installBtn:hover { transform: scale(1.1); box-shadow: 0 6px 14px rgba(0,0,0,0.5); }
+    #installBtn span {
+      position: absolute; bottom: 75px; right:0;
+      background:#000; color:#fff; padding:5px 10px; border-radius:6px;
+      font-size:0.9rem; opacity:0; transition: opacity 0.3s ease; pointer-events:none;
+    }
+    #installBtn:hover span { opacity:1; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">DigiMarket</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#servicios">Nuestros Servicios</a></li>
+              <li><a class="dropdown-item" href="#subir">Subir Archivos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="inicio" class="hero">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Bienvenido a DigiMarket</h1>
+      <p class="lead">Plataforma de productos y servicios digitales accesibles para emprendedores locales</p>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="py-5 bg-white">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">Nuestros Servicios</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card service-card shadow-sm">
+            <img src="img/Img1.jpg" class="card-img-top" alt="Diseño Web">
+            <div class="card-body">
+              <h5 class="card-title">Diseño Web</h5>
+              <p class="card-text">Crea tu página profesional con estilo moderno y responsivo.</p>
+              <button class="btn btn-dark w-100 contratar-btn" data-servicio="Diseño Web">Contratar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card service-card shadow-sm">
+            <img src="img/Img3.jpg" class="card-img-top" alt="Marketing Digital">
+            <div class="card-body">
+              <h5 class="card-title">Marketing Digital</h5>
+              <p class="card-text">Estrategias de posicionamiento y publicidad para tu negocio.</p>
+              <button class="btn btn-dark w-100 contratar-btn" data-servicio="Marketing Digital">Contratar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card service-card shadow-sm">
+            <img src="img/Img2.jpg" class="card-img-top" alt="Tienda Digital">
+            <div class="card-body">
+              <h5 class="card-title">Tienda Digital</h5>
+              <p class="card-text">Crea tu propia tienda en línea y vende tus productos digitales.</p>
+              <button class="btn btn-dark w-100 contratar-btn" data-servicio="Tienda Digital">Contratar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subir Archivos -->
+  <section id="subir" class="py-5 bg-light text-center">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Subir Archivos</h2>
+      <p>Comparte tus productos digitales (imágenes, videos o documentos) para ofrecerlos temporalmente.</p>
+      <input type="file" id="archivoInput" class="form-control w-50 mx-auto" multiple accept="image/*,video/*,.pdf,.zip" />
+      <button id="subirBtn" class="btn btn-dark mt-3">Subir Archivos</button>
+      <div id="resultadoSubida" class="mt-3"></div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-5 text-center">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Contacto</h2>
+      <p>Correo: contacto@digimarket.com | Tel: +52 443 555 8888</p>
+    </div>
+  </section>
+
+  <footer class="text-center text-white bg-dark py-3">
+    <p>&copy; 2025 DigiMarket - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Botón flotante de descarga / instalación -->
+  <div id="installBtn" title="Descargar App">
+    <i class="fas fa-download"></i>
+    <span>Descargar App</span>
+  </div>
+
+  <!-- Modal del formulario de contratación -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i> Registro de Contratación</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="contratarForm">
+            <div class="mb-3">
+              <label class="form-label" for="nombre">Nombre</label>
+              <input type="text" class="form-control" id="nombre" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="email">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="mensaje">Detalles del servicio</label>
+              <textarea class="form-control" id="mensaje" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark w-100">Enviar Solicitud</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwZT4YMtgBiRlq47Vx_TffvVsPSJRXmmY",
+      authDomain: "digimarket-a24b0.firebaseapp.com",
+      projectId: "digimarket-a24b0",
+      storageBucket: "digimarket-a24b0.appspot.com",
+      messagingSenderId: "7204926742",
+      appId: "1:7204926742:web:79c7943306685a3dff0c37",
+      measurementId: "G-4MLN0NVZZG"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    // Mostrar modal y llenar mensaje con servicio seleccionado
+    document.querySelectorAll('.contratar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const servicio = btn.getAttribute('data-servicio');
+        document.getElementById('mensaje').value = `Servicio seleccionado: ${servicio}`;
+        const modal = new bootstrap.Modal(document.getElementById('formModal'));
+        modal.show();
+      });
+    });
+
+    // Enviar formulario a Firestore
+    document.getElementById('contratarForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const correo = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+      try {
+        await addDoc(collection(db, "contrataciones"), {
+          nombre,
+          correo,
+          servicioDetalle: mensaje,
+          fecha: new Date().toISOString()
+        });
+        showToast('✅ Solicitud enviada con éxito');
+        e.target.reset();
+        bootstrap.Modal.getInstance(document.getElementById('formModal')).hide();
+      } catch (error) {
+        showToast('❌ Error al enviar la solicitud', 'danger');
+        console.error(error);
+      }
+    });
+
+    // Subir archivos a Firebase Storage y guardar info en Firestore
+    document.getElementById('subirBtn').addEventListener('click', async () => {
+      const input = document.getElementById('archivoInput');
+      const files = input.files;
+      if (files.length === 0) {
+        showToast('Selecciona al menos un archivo', 'warning');
+        return;
+      }
+      for (const file of files) {
+        const storageRef = ref(storage, `uploads/${Date.now()}_${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        uploadTask.on('state_changed', null, error => {
+          showToast('❌ Error al subir archivo', 'danger');
+          console.error(error);
+        }, async () => {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          await addDoc(collection(db, "archivos"), {
+            nombre: file.name,
+            url,
+            fecha: new Date().toISOString()
+          });
+          showToast(`📤 Archivo "${file.name}" subido correctamente`);
+        });
+      }
+      input.value = '';
+    });
+
+    // Mostrar toasts bootstrap
+    function showToast(message, type = 'success') {
+      const toastEl = document.createElement('div');
+      toastEl.className = `toast align-items-center text-bg-${type} position-fixed top-0 end-0 m-3`;
+      toastEl.innerHTML = `
+        <div class="d-flex">
+          <div class="toast-body">${message}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>`;
+      document.body.appendChild(toastEl);
+      const bsToast = new bootstrap.Toast(toastEl);
+      bsToast.show();
+      setTimeout(() => toastEl.remove(), 4000);
+    }
+
+    // PWA Instalación
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'flex';
+    });
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        if (result.outcome === 'accepted') {
+          showToast('✅ App instalada');
+        }
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      }
+    });
+
+    // Registrar Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => showToast('⚙️ Service Worker registrado'))
+        .catch(error => {
+          showToast('❌ Error al registrar SW', 'danger');
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
+
